@@ -1,0 +1,36 @@
+
+import java.util.*;
+
+public class Sieve {
+
+    public static List<Integer> sieveOfEratosthenes(int n) {
+
+        List<Integer> primes = new ArrayList<>();
+
+        if (n < 2) {
+            return primes;
+        }
+
+        boolean[] isPrime = new boolean[n + 1];
+        Arrays.fill(isPrime, true);
+
+        isPrime[0] = false;
+        isPrime[1] = false;
+
+        for (int p = 2; p * p <= n; p++) {
+            if (isPrime[p]) {
+                for (int j = p * p; j <= n; j += p) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        for (int i = 2; i <= n; i++) {
+            if (isPrime[i]) {
+                primes.add(i);
+            }
+        }
+
+        return primes;
+    }
+}
